@@ -19,16 +19,18 @@ import lombok.Data;
 import lombok.ToString;
 
 @Entity
-@ToString(exclude = {"comments"})
+@ToString(exclude = {"comments","favorites","likes"})
 @Data
 @Table(name = "posts")
 public class Post {
 	
-	public Post(String title, String image, boolean isArchived) {
+
+	public Post(String title, String image, String description, User user) {
 		super();
 		this.title = title;
 		this.image = image;
-		this.isArchived = isArchived;
+		this.description = description;
+		this.user = user;
 	}
 
 	@Id
@@ -55,5 +57,13 @@ public class Post {
 	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Comment> comments;
+	
+	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Favorite> favorites;
+	
+	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Like> likes;
 
 }

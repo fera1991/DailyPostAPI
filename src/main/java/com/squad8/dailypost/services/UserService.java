@@ -1,6 +1,7 @@
 package com.squad8.dailypost.services;
 
 
+import com.squad8.dailypost.models.dtos.SaveUserDTO;
 import com.squad8.dailypost.models.entities.User;
 
 public interface UserService {

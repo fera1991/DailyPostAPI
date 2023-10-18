@@ -15,18 +15,16 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "comments")
-public class Comment {
-	
-	
-	public Comment(Post post, String text) {
+@Table(name = "favorites")
+public class Favorite {
+	public Favorite(Post post, User user) {
 		super();
 		this.post = post;
-		this.text = text;
+		this.user = user;
 	}
 
 	@Id
-	@Column(name = "id_comment")
+	@Column(name = "id_favorite")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID code;
 	
@@ -34,8 +32,7 @@ public class Comment {
 	@JoinColumn(name = "id_post", nullable = true)
 	private Post post;
     
-    @Column(name = "text")
-    private String text;
-    
-
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_user", nullable = true)
+    private User user;
 }
